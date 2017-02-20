@@ -341,6 +341,7 @@
     liveSearchPlaceholder: null,
     liveSearchNormalize: false,
     liveSearchStyle: 'contains',
+    liveSearchInputAutofocus: true,
     actionsBox: false,
     iconBase: 'glyphicon',
     tickIcon: 'glyphicon-ok',
@@ -1327,7 +1328,7 @@
 
           if (!that.multiple || (that.multiple && that.options.maxOptions === 1)) {
             that.$button.focus();
-          } else if (that.options.liveSearch) {
+          } else if (that.options.liveSearch && that.options.liveSearchInputAutofocus) {
             that.$searchbox.focus();
           }
 
@@ -1358,7 +1359,7 @@
       this.$menuInner.on('click', '.divider, .dropdown-header', function (e) {
         e.preventDefault();
         e.stopPropagation();
-        if (that.options.liveSearch) {
+        if (that.options.liveSearch && that.liveSearchInputAutofocus) {
           that.$searchbox.focus();
         } else {
           that.$button.focus();
@@ -1409,9 +1410,11 @@
           if (!!$no_results.parent().length) $no_results.remove();
         }
         if (!that.multiple) that.$menuInner.find('.selected').addClass('active');
-        setTimeout(function () {
-          that.$searchbox.focus();
-        }, 10);
+        if (that.options.liveSearchInputAutofocus) {
+          setTimeout(function () {
+            that.$searchbox.focus();
+          }, 10);    
+        }
       });
 
       this.$searchbox.on('click.dropdown.data-api focus.dropdown.data-api touchend.dropdown.data-api', function (e) {
