@@ -342,6 +342,7 @@
     liveSearchNormalize: false,
     liveSearchStyle: 'contains',
     liveSearchInputAutofocus: true,
+    liveSearchActivateFirstOption: true,
     actionsBox: false,
     iconBase: 'glyphicon',
     tickIcon: 'glyphicon-ok',
@@ -1463,8 +1464,10 @@
               }
             });
             if ($foundDiv) $foundDiv.addClass('hidden');
-
-            $searchBase.not('.hidden').first().addClass('active');
+            
+            if (that.options.liveSearchActivateFirstOption) {
+              $searchBase.not('.hidden').first().addClass('active');                
+            }
             that.$menuInner.scrollTop(0);
           }
         }
@@ -1631,7 +1634,7 @@
 
         if (!that.options.liveSearch) {
           index = $items.index($items.find('a').filter(':focus').parent());
-	    } else {
+        } else {
           index = $items.index($items.filter('.active'));
         }
 
