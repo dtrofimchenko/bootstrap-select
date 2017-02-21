@@ -1491,6 +1491,12 @@
             }
             that.$menuInner.scrollTop(0);
           }
+        } else {
+          //Fixes wrong cursor position after input clearing, at least on iOS 9 and iOS 10.
+          setTimeout(function() {
+            var fakeClassName = 'bootstrap-select-fake-class';
+            that.$searchbox.addClass(fakeClassName).removeClass(fakeClassName);
+          }, 1);
         }
       });
     },
