@@ -327,6 +327,7 @@
     styleBase: 'btn',
     style: 'btn-default',
     size: 'auto',
+    maxMenuHeightPercentFromWindow: false,
     title: null,
     selectedTextFormat: 'values',
     width: false,
@@ -974,6 +975,12 @@
 
           getPos();
           menuHeight = selectOffsetBot - menuExtras.vert;
+          if (that.options.maxMenuHeightPercentFromWindow) {
+            var maxMenuHeight = $window.height() * that.options.maxMenuHeightPercentFromWindow / 100;
+            if (maxMenuHeight < menuHeight) {
+              menuHeight = maxMenuHeight;
+            }
+          }
           menuWidth = selectOffsetRight - menuExtras.horiz;
 
           if (that.options.container) {
