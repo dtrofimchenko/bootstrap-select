@@ -355,10 +355,7 @@
     mobile: false,
     selectOnTab: false,
     dropdownAlignRight: false,
-    windowPadding: 0,
-    scrollToInput: false,
-    scrollToInputDuration: 200,
-    scrollToInputOffsetFromTop: 70,
+    windowPadding: 0
   };
 
   Selectpicker.prototype = {
@@ -1196,18 +1193,7 @@
       }
 
       this.$button.click(function () {
-        var isDisabled = that.isDisabled();
-        if (!isDisabled && that.options.scrollToInput) {
-          if (!that.$newElement.hasClass('open')) {
-            $('html, body').animate(
-              {
-                scrollTop: (that.$button.offset().top - that.options.scrollToInputOffsetFromTop)
-              },
-              that.options.scrollToInputDuration
-            ); 
-          }   
-        }
-        return !isDisabled;
+        return !that.isDisabled();
       });
     },
 
